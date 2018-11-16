@@ -13,6 +13,19 @@ get_header(); ?>
 	<main id="main" class="site-main" role="main">
 		<?php
 		// Start the loop.
+
+
+		$query_args = array(
+				'post_type'      => 'goals',
+				'posts_per_page' => 1,
+			    'order'          => 'DESC', 
+			    'orderby'        => 'meta_value_num', 
+			    'meta_key'	   	 => 'goals-rating',
+		);
+
+		$result = new WP_Query( $query_args );
+		var_dump($result);
+
 		while ( have_posts() ) : the_post();
 
 			// Include the single post content template.

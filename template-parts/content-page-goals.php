@@ -10,29 +10,11 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php //the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-		<!-- <h1>Text added after the Title for Home only.</h1> -->
+		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php //twentysixteen_post_thumbnail(); 
-
-		//var_dump(get_field('goals-goalscorer'));
-		if (get_field('goals-goalscorer')){ ?>
-			<h1 class="goal_machine">This Goal Machine is<h1>
-			<h1 class="goal_machine blink"><?php the_field('goals-goalscorer');?></h1>
-			<!-- <img src="<?php //the_field('company_logo');?> "> -->
-		<?php 
-		} 
-
-		if (get_field('goals-rating')){ ?>
-			<h2 class="goal_machine">Goal rating of <?php the_field('goals-rating');?> </h2>
-		<?php 
-		}
-		
-		if (get_field('goals-youtube_embedded')){
-			the_field('goals-youtube_embedded');
-		}
-	?>
+		<h2>See if this comes out</h2>
+	<?php twentysixteen_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php

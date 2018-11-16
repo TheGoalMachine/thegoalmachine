@@ -28,18 +28,63 @@ get_header(); ?>
 			<?php endif; ?>
 
 			<?php
-			// Start the loop.
-			while ( have_posts() ) : the_post();
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content-page', get_post_format() );
 
-			// End the loop.
-			endwhile;
+				$query_args = array(
+				'post_type'      => 'goals',
+				'posts_per_page' => 1,
+				'orderby'        => 'meta_value_num', 
+			    'meta_key'	   	 => 'goals-rating',
+			    //'meta_key'	   	 => 'goals-rating',
+			    'order'          => 'DESC'
+			    //'orderby'        => 'goals-rating'
+				);
+
+				$result = new WP_Query( $query_args );
+				//$posts  = $result->posts;
+			?>
+				<!--<pre>
+				  <?php 
+				  	//var_dump($result);
+				  	//var_dump($posts);
+				  	//var_dump($posts[0]->guid);
+				  	//var_dump($posts[0]->ID);
+				  	//var_dump($posts[0]->post_name);
+
+				    //var_dump($result->have_posts());
+
+				  	//the_field('goals-goalscorer')
+				  ?>
+				</pre> -->
+				
+				<?php
+
+				//echo $result['posts']->guid;
+
+				if ($result->have_posts()){
+		 			?>
+		 			<!-- <h1> Inside if</h1> -->
+		 			<?php 
+					//while ( $result->have_posts() ) : the_post();
+					while ( $result->have_posts() ) : $result->the_post(); ?>
+						
+						 <!-- <h2> inside while</h2> -->
+						<?php
+						/*
+						 * Include the Post-Format-specific template for the content.
+						 * If you want to override this in a child theme, then include a file
+						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+						 */
+						get_template_part( 'template-parts/content-page', 'front');
+						//get_post_format() );
+
+					// End the loop.
+					endwhile;
+				}else{
+					echo'No Goals Found';
+				};
+
+				echo "return";
 
 			// Previous/next page navigation.
 			the_posts_pagination( array(
@@ -55,8 +100,8 @@ get_header(); ?>
 		endif;
 		?>
 
-		</main><!-- .site-main -->
-	</div><!-- .content-area -->
+		</main> 
+	</div>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
